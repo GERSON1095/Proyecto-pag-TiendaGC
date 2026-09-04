@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Arquitectura – GC Tienda</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 24px; background: #f0f2f5; color: #212529; }
+  h1 { font-size: 1.4rem; }
+  .layer {
+    border-radius: 12px; padding: 20px 24px; margin: 16px auto; max-width: 720px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08); text-align: center;
+  }
+  .frontend { background: #0d6efd; color: #fff; }
+  .backend  { background: #198754; color: #fff; }
+  .db       { background: #6f42c1; color: #fff; }
+  .arrow { text-align: center; font-size: 1.8rem; color: #6c757d; margin: 4px 0; }
+  .layer h2 { margin: 0 0 8px; font-size: 1.1rem; }
+  .layer p { margin: 0; font-size: .9rem; opacity: .95; }
+  .note { max-width: 720px; margin: 24px auto; background: #fff; padding: 16px 20px;
+          border-radius: 8px; font-size: .9rem; border-left: 4px solid #0d6efd; }
+</style>
+</head>
+<body>
+<h1 style="text-align:center;">GC Tienda – Diagrama de arquitectura</h1>
+
+<div class="layer frontend">
+  <h2>Frontend (Presentación)</h2>
+  <p>HTML · Bootstrap 5 · JavaScript (i18n, chatbot)<br>
+  Vistas PHP: catálogo, login, registro, carrito, checkout, pedidos, panel admin</p>
+</div>
+<div class="arrow">↓ HTTP (GET / POST) · Sesión PHP</div>
+
+<div class="layer backend">
+  <h2>Backend / Lógica de negocio</h2>
+  <p>PHP 8 + PDO<br>
+  Auth y roles · CRUD productos · Inventario · Pedidos (transacciones) · Cifrado AES-256</p>
+</div>
+<div class="arrow">↓ PDO / SQL</div>
+
+<div class="layer db">
+  <h2>Base de datos</h2>
+  <p>MySQL · Base <code>gc_tienda</code><br>
+  usuarios · categorias · productos · pedidos · detalle_pedido · atenciones_chatbot</p>
+</div>
+
+<div class="note">
+  <strong>Esquema del enunciado:</strong>
+  Frontend → Backend / API → Base de datos<br><br>
+  En este proyecto el “Backend / API” es la capa PHP de lógica de negocio
+  (sin API REST separada). Se justifica por continuidad del proyecto existente
+  y por facilitar la demostración de la relación interfaz ↔ lógica ↔ datos.
+</div>
+</body>
+</html>
